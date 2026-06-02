@@ -10,10 +10,10 @@ import java.util.List;
 
 public class JwtUtil {
 
-    private static final String HEADER = "Authorization"; // HTTP 헤더 이름
-    private static final String TOKEN_PREFIX = "Bearer "; // 토큰 접두수 (공백 반드시 포함)
-    private static final String SECRET = "텐코딩시크릿";
-    private static final Long EXP_TIME = 1000L * 60 * 60 * 24; // 토큰 유효 시간 1일 설정
+    public static final String HEADER = "Authorization"; // HTTP 헤더 이름
+    public static final String TOKEN_PREFIX = "Bearer "; // 토큰 접두수 (공백 반드시 포함)
+    public static final String SECRET = "텐코딩시크릿";
+    public static final Long EXP_TIME = 1000L * 60 * 60 * 24; // 토큰 유효 시간 1일 설정
 
 
     // JWT 토큰 생성
