@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @Column(length = 30, nullable = false)
     private String email;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     // JPA 가 뒤에서 쿼리를 짜서 데이터베이스에 테이블을 자동으로 만들어 줌(굳이 ROLE 엔티티 선언 불 필요)
     @CollectionTable(name = "user_role_tb", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
@@ -41,6 +41,17 @@ public class User implements UserDetails {
 
     @CreationTimestamp
     private Timestamp createdAt;
+
+    public void update(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public void updateRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+
 
     // UserDetails 필수 구현 메서드
 
