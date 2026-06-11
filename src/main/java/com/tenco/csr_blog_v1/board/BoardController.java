@@ -1,5 +1,6 @@
 package com.tenco.csr_blog_v1.board;
 
+import com.tenco.csr_blog_v1.core.handler.errors.UnauthorizedException;
 import com.tenco.csr_blog_v1.core.util.Resp;
 import com.tenco.csr_blog_v1.user.User;
 import jakarta.validation.Valid;
@@ -40,4 +41,13 @@ public class BoardController {
         return Resp.ok(responseDTO);
     }
 
+    @GetMapping("/{boardId}/edit")
+    public ResponseEntity<?> updateInfo(@AuthenticationPrincipal User sessionUser,
+                                        @PathVariable("boardId") Integer boardId) {
+        if (sessionUser == null) {
+            throw new UnauthorizedException("로그인이 필요합니다");
+        }
+        BoardResponse.DTO responseDTO = boardService.게시글정보(boardId, sessionUser.getId());
+        return  Resp.ok(responseDTO);
+    }
 }
