@@ -50,4 +50,14 @@ public class BoardController {
         BoardResponse.DTO responseDTO = boardService.게시글정보(boardId, sessionUser.getId());
         return  Resp.ok(responseDTO);
     }
+
+    @PutMapping("/{boardId}")
+    public ResponseEntity<?> update(@AuthenticationPrincipal User sessionUser,
+                                    @PathVariable("boardId") Integer boardId,
+                                    @Valid @RequestBody BoardRequest.UpdateDTO requestDTO,
+                                    Errors errors) {
+
+        BoardResponse.DTO responseDTO = boardService.게시글수정(requestDTO, boardId, sessionUser.getId());
+        return Resp.ok(responseDTO);
+    }
 }
