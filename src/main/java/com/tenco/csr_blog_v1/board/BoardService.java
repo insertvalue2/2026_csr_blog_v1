@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -25,6 +26,7 @@ public class BoardService {
     // 중간연산, 최종 연산이란 개념이 있다. 항상 최종 연산이 호출 되어야 동작 한다.
     public List<BoardResponse.DTO> 게시글목록() {
         return boardRepository.findAll().stream() // 1. 컨베이어 벨트에 엔티티들을 올린다.
+                .sorted(Comparator.comparing(Board::getId).reversed()) // DESC 정렬
                 .map(BoardResponse.DTO::new)      // 2. 가공 로봇(map)이 엔티티들을 DTO 로 변경하는 작업을 한다
                 .toList();                        // 3. 최종 연산 단계 : 완성된 DTO 들을 리스트 상자에 담는 역할을 한다.
     }

@@ -43,7 +43,7 @@ public class Board {
     public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
         this.id = id;
         this.title = title;
-        content = content;
+        this.content = content;
         this.user = user;
         this.createdAt = createdAt;
     }
